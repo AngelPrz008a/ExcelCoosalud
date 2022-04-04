@@ -8,25 +8,16 @@ use App\Imports\ImportModel;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
+
+//TODO LO RELEVANTE A CARGUE Y MUESTRA DE DATOS DEL EXCEL
+//CARGUE, MUESTRA, ACTUALIZACION Y ELIMINACION
 class ExcelController extends Controller
 {
-    public function index()
+
+    public function import(Request $request, $idWork)
     {
-        if( ExcelModel::count() ){
-            $controller = new ExcelController();
-            return $controller->show();
-        }
-        return view('Excel.index');
-    }
-
-
-    public function import(Request $request)
-    {
-       $document = $request->file('document');
-        Excel::import(new ImportModel, $document);
-
-        return back()->
-        with('msg', 'OK');
+        $document = $request->file('document');
+        Excel::import(new ImportModel($idWork), $document);
     }
 
     public function show(){
@@ -42,12 +33,13 @@ class ExcelController extends Controller
         foreach( ExcelModel::all() as $row ){
             $row->delete();
         }
-        return redirect('index');
+        return redirect('excel');
     }
 
     public function update(Request $request){
+        $model = ExcelModel::select('id')->
+        where('idWork','=',$request->idWork)->get();
 
-        $model = ExcelModel::select('id')->get();
         foreach($model as $m){
             $excel = ExcelModel::where('id','=',intval($m['id']) )->get();
             foreach($excel as $sql){

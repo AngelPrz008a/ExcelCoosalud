@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('c', function (Blueprint $table) {
+        Schema::create('excel', function (Blueprint $table) {
             $table->id();
-            $table->string('system');
-            $table->string('employee');
-            $table->string('company');
-            $table->string('state');
-
+            $table->string('system',10);
+            $table->string('employee',15);
+            $table->string('company',10);
+            $table->string('state',20);
+            $table->unsignedBigInteger('idWork');
+            $table->foreign('idWork')->references('id')->on('work');
         });
     }
 
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('c');
+        Schema::dropIfExists('excel');
     }
 };

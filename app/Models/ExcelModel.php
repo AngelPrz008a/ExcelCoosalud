@@ -17,7 +17,8 @@ class ExcelModel extends Model
         'system',
         'employee',
         'company',
-        'state'
+        'state',
+        'idWork'
     ];
 
 }

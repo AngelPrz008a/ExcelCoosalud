@@ -9,6 +9,12 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class ImportModel implements ToModel, WithHeadingRow
 {
 
+    private $idWork;
+
+    public function __construct( int $idWork)
+    {
+        $this->idWork = $idWork;
+    }
 
     public function model(array $row)
     {
@@ -19,7 +25,7 @@ class ImportModel implements ToModel, WithHeadingRow
             'employee' => $row['numero_documento_na'],
             'company' => $row['numero_de_documento'],
             'state' => $row['estado'],
-
+            'idWork' => $this->idWork
         ]);
     }
 }

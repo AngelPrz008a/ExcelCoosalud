@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +38,7 @@
 
 <form action="{{  url('update')  }}" method="post">
 @csrf
+
 <table>
     <tr>
         {{--  <th>Id</th> --}}
@@ -45,25 +48,27 @@
         <th>State</th>
     </tr>
 
-    @foreach ($rows as $row)
+    @foreach ($excels as $excel)
     <tr>
+        <input style="display:none;" name="idWork" value="{{ $excel->idWork }}">
+
         <td>
-            <a onclick="copiar('{{ $row->system }}')">{{  $row->system  }}</a>
+            <a onclick="copiar('{{ $excel->system }}')">{{  $excel->system  }}</a>
         </td>
         <td>
-            <a onclick="copiar('{{ $row->employee }}')">{{  $row->employee  }}</a>
+            <a onclick="copiar('{{ $excel->employee }}')">{{  $excel->employee  }}</a>
         </td>
         <td>
-            <a onclick="copiar('{{ $row->company }}')">{{  $row->company  }}</a>
+            <a onclick="copiar('{{ $excel->company }}')">{{  $excel->company  }}</a>
         </td>
         <td>
-            <select name="{{  $row->id  }}">
+            <select name="{{ $excel->id }}">
                 <option value="NUEVO">Seleccione</option>
-                <option value="APROBADO" {{ $row->state == 'APROBADO' ? 'selected' : '' }} >APROBADO</option>
-                <option value="INCOMPLETO" {{ $row->state == 'INCOMPLETO' ? 'selected' : '' }} >INCOMPLETO</option>
-                <option value="VIGENTE" {{ $row->state == 'VIGENTE' ? 'selected' : '' }} >RELACION VIGENTE</option>
-                <option value="INSCRIPCION"  {{ $row->state == 'INSCRIPCION' ? 'selected' : '' }} >INSCRIPCION SALUS</option>
-                <option value="CERTIFICADO"  {{ $row->state == 'CERTIFICADO' ? 'selected' : '' }} >CERTIFICADO</option>
+                <option value="APROBADO" {{ $excel->state == 'APROBADO' ? 'selected' : '' }} >APROBADO</option>
+                <option value="INCOMPLETO" {{ $excel->state == 'INCOMPLETO' ? 'selected' : '' }} >INCOMPLETO</option>
+                <option value="VIGENTE" {{ $excel->state == 'VIGENTE' ? 'selected' : '' }} >RELACION VIGENTE</option>
+                <option value="INSCRIPCION"  {{ $excel->state == 'INSCRIPCION' ? 'selected' : '' }} >INSCRIPCION SALUS</option>
+                <option value="CERTIFICADO"  {{ $excel->state == 'CERTIFICADO' ? 'selected' : '' }} >CERTIFICADO</option>
             </select>
         </td>
         <td>
